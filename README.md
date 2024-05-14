@@ -7,3 +7,7 @@ Oracle's free tier offers a generous ARM instance with 4 cors and 24gb of memory
 
 **Differences**:
 - I am using Bash and Linux
+- API key to authenticate without time limit as opposed to sessions limited to 1 hour
+- Script allows additional customizations like boot volume disk size and a SSH key to connect to the instance
+- Script was simplified and shows the whole error response (see [screenshot](screenshot.png))
+- More documentation and step by step explanation
