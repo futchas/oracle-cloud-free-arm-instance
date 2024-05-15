@@ -11,3 +11,8 @@ Oracle's free tier offers a generous ARM instance with 4 cors and 24gb of memory
 - Script allows additional customizations like boot volume disk size and a SSH key to connect to the instance
 - Script was simplified and shows the whole error response (see [screenshot](screenshot.png))
 - More documentation and step by step explanation
+
+## Setup
+1. Install the Oracle cloud CLI for Linux/Unix: https://docs.oracle.com/en-us/iaas/Content/API/SDKDocs/cliinstall.htm#InstallingCLI__linux_and_unix
+2. Login to your Oracle Cloud account in the browser: https://cloud.oracle.com/
+3. Go to Profile -> My Profile (User information OCID) and copy the **user ocid** somewhere
