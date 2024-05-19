@@ -7,3 +7,22 @@ if [ $? -ne 0 ]; then
     echo "Connection to Oracle cloud is not working. Check your setup and config again!"
     exit 1
 fi
+
+# ----------------------ENDLESS LOOP TO REQUEST AN ARM INSTANCE---------------------------------------------------------
+
+while true; do
+
+    oci compute instance launch --no-retry  \
+    --auth api_key \
+    --profile "DEFAULT" \
+    --display-name big-arm \
+    --compartment-id "$TENANCY_ID" \
+    --image-id "$IMAGE_ID" \
+    --subnet-id "$SUBNET_ID" \
+    --availability-domain "$AVAILABILITY_DOMAIN" \
+    --shape 'VM.Standard.A1.Flex' \
+    --shape-config "{'ocpus'4,'memoryInGBs':24}" \
+    --ssh-authorized-keys-file "$PATH_TO_PUBLIC_SSH_KEY"
+
+    sleep 60
+done
