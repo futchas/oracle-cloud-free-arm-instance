@@ -22,6 +22,7 @@ while true; do
     --availability-domain "$AVAILABILITY_DOMAIN" \
     --shape 'VM.Standard.A1.Flex' \
     --shape-config "{'ocpus'4,'memoryInGBs':24}" \
+    --boot-volume-size-in-gbs "50" \
     --ssh-authorized-keys-file "$PATH_TO_PUBLIC_SSH_KEY"
 
     sleep 60
