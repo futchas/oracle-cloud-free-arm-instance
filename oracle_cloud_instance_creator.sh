@@ -8,6 +8,9 @@ if [ $? -ne 0 ]; then
     exit 1
 fi
 
+# Don't go too low or you run into 429 TooManyRequests
+requestInterval=60 # seconds
+
 # ----------------------ENDLESS LOOP TO REQUEST AN ARM INSTANCE---------------------------------------------------------
 
 while true; do
@@ -25,5 +28,5 @@ while true; do
     --boot-volume-size-in-gbs "50" \
     --ssh-authorized-keys-file "$PATH_TO_PUBLIC_SSH_KEY"
 
-    sleep 60
+    sleep $requestInterval
 done
