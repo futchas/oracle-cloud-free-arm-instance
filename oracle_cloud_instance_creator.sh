@@ -16,6 +16,9 @@ requestInterval=60 # seconds
 # VM params
 cpus=4 # max 4 cores
 ram=24 # max 24gb memory
+bootVolume=50 # disk size in gb
+
+profile="DEFAULT"
 
 # ----------------------ENDLESS LOOP TO REQUEST AN ARM INSTANCE---------------------------------------------------------
 
@@ -23,7 +26,7 @@ while true; do
 
     oci compute instance launch --no-retry  \
     --auth api_key \
-    --profile "DEFAULT" \
+    --profile "$profile" \
     --display-name big-arm \
     --compartment-id "$TENANCY_ID" \
     --image-id "$IMAGE_ID" \
@@ -31,7 +34,7 @@ while true; do
     --availability-domain "$AVAILABILITY_DOMAIN" \
     --shape 'VM.Standard.A1.Flex' \
     --shape-config "{'ocpus':$cpus,'memoryInGBs':$ram}" \
-    --boot-volume-size-in-gbs "50" \
+    --boot-volume-size-in-gbs "$bootVolume" \
     --ssh-authorized-keys-file "$PATH_TO_PUBLIC_SSH_KEY"
 
     sleep $requestInterval
