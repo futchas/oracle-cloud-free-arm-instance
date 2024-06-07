@@ -1,5 +1,14 @@
 #!/bin/bash
 
+source .env
+
+if [[ -z "${TENANCY_ID}" ]]; then
+    echo "TENANCY_ID is unset or empty. Please change in .env file"
+    exit 1
+else
+    echo "TENANCY_ID is set correctly"
+fi
+
 # To verify that the authentication with Oracle cloud works
 echo "Checking Connection with this request: "
 oci iam compartment list
