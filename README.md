@@ -16,3 +16,29 @@ Oracle's free tier offers a generous ARM instance with 4 cors and 24gb of memory
 1. Install the Oracle cloud CLI for Linux/Unix: https://docs.oracle.com/en-us/iaas/Content/API/SDKDocs/cliinstall.htm#InstallingCLI__linux_and_unix
 2. Login to your Oracle Cloud account in the browser: https://cloud.oracle.com/
 3. Go to Profile -> My Profile (User information OCID) and copy the **user ocid** somewhere
+4. Go to Profile -> Tenancy (Tenancy information OCID) and copy the value into the [.env file](.env) in the variable `TENANCY_ID`
+5. Go to Profile -> My profile -> API keys
+    - Click on "Add API key" and download the private and public key
+6. Configure OCI by running following command in your terminal: `oci setup config`
+    - In the console prompt fill in the **user ocid (step 3**) and **tenancy ocid (step 4)**
+    - Select your region number (e.g. type in `24` for `eu-frankfurt-1`)
+    - Press `n` to use the existing key previously generated
+    - Provide the path to the private key file previously downloaded in step 5
+    - Config should be written now and we already added the API key in step 5
+    - **Note**: In case you are asked for a profile name: Type in "DEFAULT"
+
+7. Execute following command to get a list of possible images. Select one and copy it into the [.env](.env) variable `IMAGE_ID`:
+```
+oci compute image list --all -c "$TENANCY_ID" --auth api_key | jq -r '.data[] | select(.["display-name"] | contains("aarch64")) | "\(.["display-name"]): \(.id)"'
+```
+8. To get a list of possible Subnets, which you can save in the [.env](.env) variable `SUBNET_ID`:
+```
+oci network subnet list -c "$TENANCY_ID" --auth api_key | jq -r '.data[] | "\(.["display-name"]): \(.id)"'
+```
+9. Copy the availability domain into the [.env](.env) variable `AVAILABILITY_DOMAIN`:
+```
+oci iam availability-domain list -c "$TENANCY_ID" --auth api_key | jq -r '.data[].name'
+```
+10. Lastly change the variable `PATH_TO_PUBLIC_SSH_KEY` in the [.env](.env) file. That;s the path to a public SSH key on your machine to connect to the ARM instance once it's created
+- Either download it from the Oracle Cloud instance creation website or [generate an ssh key yourself](https://docs.github.com/en/authentication/connecting-to-github-with-ssh/generating-a-new-ssh-key-and-adding-it-to-the-ssh-agent#generating-a-new-ssh-key)  
+  Finally, we are done with the setup (hardest part)
