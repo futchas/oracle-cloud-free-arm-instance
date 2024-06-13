@@ -42,3 +42,8 @@ oci iam availability-domain list -c "$TENANCY_ID" --auth api_key | jq -r '.data[
 10. Lastly change the variable `PATH_TO_PUBLIC_SSH_KEY` in the [.env](.env) file. That;s the path to a public SSH key on your machine to connect to the ARM instance once it's created
    - Either download it from the Oracle Cloud instance creation website or [generate an ssh key yourself](https://docs.github.com/en/authentication/connecting-to-github-with-ssh/generating-a-new-ssh-key-and-adding-it-to-the-ssh-agent#generating-a-new-ssh-key)  
 Finally, we are done with the setup (hardest part)
+
+## Customize (optional)
+Inside the file `/oracle_cloud_instance_creator.sh` you will find a section to change following parameters:
+
+CPU cores, memory in gb, boot volume disk space, path to public SSH key, interval of the creation request
