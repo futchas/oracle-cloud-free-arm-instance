@@ -47,3 +47,15 @@ Finally, we are done with the setup (hardest part)
 Inside the file `/oracle_cloud_instance_creator.sh` you will find a section to change following parameters:
 
 CPU cores, memory in gb, boot volume disk space, path to public SSH key, interval of the creation request
+
+## Run script 
+- Open the terminal and go to the path of this repo
+- make sure the creator script can be executed 
+```
+chmod +x oracle_cloud_instance_creator.sh
+```
+- Run the script with:
+```
+./oracle_cloud_instance_creator.sh
+```
+Every minute (default `requestInterval`) the script will request an instance. The console will print a JSON `ServerError` response until the instance creation was successful. The creation could take days or in some cases weeks/months. You could run it on your machine, but I'd recommend to create a simple free AMD instance first and run it there in the background.
