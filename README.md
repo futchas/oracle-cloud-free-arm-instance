@@ -59,3 +59,6 @@ chmod +x oracle_cloud_instance_creator.sh
 ./oracle_cloud_instance_creator.sh
 ```
 Every minute (default `requestInterval`) the script will request an instance. The console will print a JSON `ServerError` response until the instance creation was successful. The creation could take days or in some cases weeks/months. You could run it on your machine, but I'd recommend to create a simple free AMD instance first and run it there in the background.
+
+Screenshot of how the error 500 response would look like. If you see something like this everything works as expected: 
+![screenshot](screenshot.png)
